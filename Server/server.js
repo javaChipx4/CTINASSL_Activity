@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
+const connectDB = require('./components/config/dbConnect');
+const userRouter = require('./components/controller/userController');
  
+connectDB();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/users', userRouter);
  
 app.get('/', (req, res) => {
   res.status(200).send('Hello, World!');
